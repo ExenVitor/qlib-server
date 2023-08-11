@@ -1,4 +1,4 @@
-FROM continuumio/miniconda3:4.8.2
+FROM python:3.8-slim
 
 ARG DEFAULT_HOST=127.0.0.1
 ARG QLIB_DATA=/data/stock_data/qlib_data
@@ -17,12 +17,14 @@ ARG SERVER_DIR=$QLIB_CODE/qlib-server
 WORKDIR $SERVER_DIR
 COPY . .
 
-RUN apt-get --allow-releaseinfo-change update\
+RUN sed -i "s@http://deb.debian.org@http://mirrors.aliyun.com@g" /etc/apt/sources.list && rm -Rf /var/lib/apt/lists/*\
+    &&apt-get --allow-releaseinfo-change update\
     && apt-get install -y g++\
     && apt-get clean\
     && rm -rf /var/lib/apt/lists/*\
+    && pip config set global.index-url https://mirrors.cloud.tencent.com/pypi/simple\
     && pip install cython numpy -U\
-    && pip install git+https://github.com/microsoft/qlib\
+    && pip install pyqlib\
     && cd $SERVER_DIR\
     && python setup.py install\
     && pip install -U python-engineio==3.11.2 python-socketio==4.4.0 flask-socketio==3.1.2\
