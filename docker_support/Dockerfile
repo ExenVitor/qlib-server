@@ -27,7 +27,6 @@ RUN sed -i 's/deb.debian.org/mirrors.ustc.edu.cn/g' /etc/apt/sources.list.d/debi
     && pip install pyqlib\
     && cd $SERVER_DIR\
     && pip install .\
-    && pip install -U python-engineio==3.11.2 python-socketio==4.4.0 flask-socketio==3.1.2\
     && /bin/sed -i "s@<QLIB_DATA>@$QLIB_DATA@g" config_template.yaml\
     && /bin/sed -i "s@<QUEUE_HOST>@$QUEUE_HOST@g" config_template.yaml\
     && /bin/sed -i "s@<QUEUE_USER>@$QUEUE_USER@g" config_template.yaml\
@@ -38,7 +37,7 @@ RUN sed -i 's/deb.debian.org/mirrors.ustc.edu.cn/g' /etc/apt/sources.list.d/debi
     && /bin/sed -i "s@<REDIS_PORT>@$REDIS_PORT@g" config_template.yaml\
     && /bin/sed -i "s@<REDIS_DB>@$REDIS_DB@g" config_template.yaml\
     && /bin/sed -i "s@<FLASK_SERVER_HOST>@$FLASK_SERVER_HOST@g" config_template.yaml\
-    && git clone https://github.com/vishnubob/wait-for-it.git
+    && git clone https://ghproxy.com/https://github.com/vishnubob/wait-for-it.git
 
 EXPOSE 9710
 CMD ["python", "main.py", "-c", "config_template.yaml"]

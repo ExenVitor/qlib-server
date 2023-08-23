@@ -31,7 +31,7 @@ if not _QLIB_INSTALLED:
 
 # What packages are required for this module to be executed?
 REQUIRED = [
-    "Flask>=1.1.4, <2.0",
+    "Flask>=1.1.4",
     "Flask-SocketIO>=3.1.2",
     "gevent>=1.3.7",
     "pika>=0.12.0",
