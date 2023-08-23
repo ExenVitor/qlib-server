@@ -17,16 +17,16 @@ ARG SERVER_DIR=$QLIB_CODE/qlib-server
 WORKDIR $SERVER_DIR
 COPY . .
 
-RUN sed -i "s@http://deb.debian.org@http://mirrors.aliyun.com@g" /etc/apt/sources.list && rm -Rf /var/lib/apt/lists/*\
-    &&apt-get --allow-releaseinfo-change update\
-    && apt-get install -y g++\
+RUN sed -i 's/deb.debian.org/mirrors.ustc.edu.cn/g' /etc/apt/sources.list.d/debian.sources\
+    && apt-get --allow-releaseinfo-change update\
+    && apt-get install -y g++ git\
     && apt-get clean\
     && rm -rf /var/lib/apt/lists/*\
     && pip config set global.index-url https://mirrors.cloud.tencent.com/pypi/simple\
     && pip install cython numpy -U\
     && pip install pyqlib\
     && cd $SERVER_DIR\
-    && python setup.py install\
+    && pip install .\
     && pip install -U python-engineio==3.11.2 python-socketio==4.4.0 flask-socketio==3.1.2\
     && /bin/sed -i "s@<QLIB_DATA>@$QLIB_DATA@g" config_template.yaml\
     && /bin/sed -i "s@<QUEUE_HOST>@$QUEUE_HOST@g" config_template.yaml\

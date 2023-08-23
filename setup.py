@@ -29,24 +29,19 @@ if not _QLIB_INSTALLED:
     print("Please install the latest version of qlib first.")
     exit(-1)
 
-PYPI_MIRROR = "https://mirrors.cloud.tencent.com/pypi/simple"
 # What packages are required for this module to be executed?
 REQUIRED = [
-    "Flask>=1.1.4, <2.0;",
-    "Flask-SocketIO>=3.1.2;",
-    "gevent>=1.3.7;",
-    "pika>=0.12.0;",
-    "redis>=3.0.1;",
-    "python-redis-lock>=3.3.1;",
-    "schedule>=0.6.0;",
-    "tqdm>=4.31.1;",
+    "Flask>=1.1.4, <2.0",
+    "Flask-SocketIO>=3.1.2",
+    "gevent>=1.3.7",
+    "pika>=0.12.0",
+    "redis>=3.0.1",
+    "python-redis-lock>=3.3.1",
+    "schedule>=0.6.0",
+    "tqdm>=4.31.1",
     "fabric2",
     "loguru",
     "fire",
-]
-
-REQUIRED = [
-    f"{raw_pkg} @ {PYPI_MIRROR}" for raw_pkg in REQUIRED
 ]
 
 here = os.path.abspath(os.path.dirname(__file__))
