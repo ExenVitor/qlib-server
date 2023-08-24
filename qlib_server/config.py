@@ -34,6 +34,8 @@ _server_config = {
     "redis_host": "10.150.144.154",
     "redis_port": 6379,
     "redis_task_db": 1,
+
+    "region": "cn"
 }
 
 LoggingConfig = {
@@ -125,4 +127,5 @@ def init(conf, logging_config=None):
         redis_task_db=C["redis_task_db"],
         redis_port=C["redis_port"],
         redis_host=C["redis_host"],
+        region=C["region"]
     )
